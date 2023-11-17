@@ -54,6 +54,12 @@ def add_expense():
         return jsonify({'error': 'Invalid split type'}), 400
 
     return jsonify({'message': 'Expense added successfully', 'balances': user_balances})
+    
+# Write the HTTP API endpoints required to fulfill the requirements
+@app.route('/get_balances/<user_id>', methods=['GET'])
+def get_balances(user_id):
+    balances = {user: balance for user, balance in user_balances.items() if balance != 0 and user != user_id}
+    return jsonify({'balances': balances})
 
 if __name__ == '__main__':
     app.run(debug=True)
